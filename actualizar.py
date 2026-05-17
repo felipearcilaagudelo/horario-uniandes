@@ -3,85 +3,106 @@ import datetime
 from collections import defaultdict
 
 # --- CONFIGURACIÓN ---
-PERIODO = "202618" 
-ARCHIVO_LISTA = "mis_clases.txt" # El archivo de tu imagen
+# Agregamos todos los periodos donde quieres buscar
+PERIODOS = ["202618", "202619"] 
+ARCHIVO_LISTA = "mis_clases.txt"
 README_FILE = "README.md"
 
-DIAS_LABELS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
 DIAS_MAP = {"L": 0, "M": 1, "W": 2, "I": 3, "V": 4, "S": 5}
 
-def buscar_nrc(nrc):
-    url = f"https://ofertadecursos.uniandes.edu.co/api/courses?term={PERIODO}&p_numb={nrc}"
+def buscar_nrc_en_periodos(nrc):
     headers = {'User-Agent': 'Mozilla/5.0'}
-    try:
-        r = requests.get(url, headers=headers, timeout=10)
-        data = r.json()
-        cursos = data if isinstance(data, list) else data.get('courses', [])
-        # Filtrar solo el NRC exacto por si la búsqueda devuelve parecidos
-        return [c for c in cursos if str(c.get('nrc')) == str(nrc)]
-    except:
-        return []
+    # Buscamos en cada periodo de la lista hasta encontrarlo
+    for periodo in PERIODOS:
+        url = f"https://ofertadecursos.uniandes.edu.co/api/courses?term={periodo}&p_numb={nrc}"
+        try:
+            r = requests.get(url, headers=headers, timeout=10)
+            data = r.json()
+            cursos = data if isinstance(data, list) else data.get('courses', [])
+            for c in cursos:
+                if str(c.get('nrc')) == str(nrc):
+                    # Guardamos el periodo donde se encontró para mostrarlo luego
+                    c['periodo_encontrado'] = periodo
+                    return c
+        except:
+            continue
+    return None
 
 def generar_horario():
     try:
         with open(ARCHIVO_LISTA, "r") as f:
             nrcs = [line.strip() for line in f if line.strip()]
-    except FileNotFoundError:
-        print("No se encontró mis_clases.txt")
+    except:
         return
 
-    # Estructura para la tabla: horario[hora][dia_index]
     horario_grid = defaultdict(lambda: defaultdict(str))
     lista_detalles = []
 
     for nrc in nrcs:
-        print(f"Procesando NRC: {nrc}...")
-        resultados = buscar_nrc(nrc)
-        
-        for curso in resultados:
-            cod_clase = curso.get('class', 'Clase')
-            titulo = curso.get('course_title', '')
-            lista_detalles.append(curso)
-            
-            for s in curso.get('schedules', []):
-                dia = s.get('day')
-                hora_str = s.get('time', '') # Formato "0800-0920"
-                
-                if dia in DIAS_MAP and hora_str and hora_str != 'TBA':
-                    d_idx = DIAS_MAP[dia]
-                    h_inicio = int(hora_str.split('-')[0][:2])
-                    h_fin = int(hora_str.split('-')[1][:2])
-                    
-                    # Llenar todos los bloques de hora que ocupa la clase
-                    for h in range(h_inicio, h_fin + 1):
-                        # Evitar sobreescribir si hay cruces, mejor concatenar
-                        if horario_grid[h][d_idx]:
-                            horario_grid[h][d_idx] += f"<br>⚠️ **CRUCE:** {cod_clase}"
-                        else:
-                            horario_grid[h][d_idx] = f"**{cod_clase}**<br>({nrc})"
+        curso = buscar_nrc_en_periodos(nrc)
+        if not curso:
+            print(f"No se encontró el NRC {nrc} en ninguno de los periodos {PERIODOS}")
+            continue
 
-    # Escribir el README
-    with open(README_FILE, "w", encoding="utf-8") as f:
-        f.write(f"# 🗓️ Mi Horario Uniandes\n")
-        f.write(f"Generado: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}\n\n")
+        # Extracción robusta de nombres
+        dept = curso.get('class') or curso.get('subject') or "???"
+        num = curso.get('course_number') or curso.get('course') or ""
+        titulo = curso.get('course_title') or curso.get('title') or curso.get('courseTitle') or "Materia"
+        periodo = curso.get('periodo_encontrado')
         
-        # Dibujar la tabla Markdown
-        f.write("### 🕒 Cuadrícula Semanal\n\n")
+        lista_detalles.append({'dept': dept, 'num': num, 'titulo': titulo, 'nrc': nrc, 'periodo': periodo, 'raw': curso})
+
+        # Procesar horarios
+        schs = curso.get('schedules') or curso.get('schedule') or []
+        if isinstance(schs, dict): schs = [schs]
+
+        for s in schs:
+            dia = s.get('day') or s.get('days') or ""
+            hora_str = s.get('time') or s.get('hour') or ""
+            
+            if dia in DIAS_MAP and hora_str and "-" in hora_str:
+                d_idx = DIAS_MAP[dia]
+                try:
+                    parts = hora_str.replace(":", "").split('-')
+                    h_inicio = int(parts[0][:2])
+                    h_fin = int(parts[1][:2])
+                    
+                    # Pintar bloques (Ampliado hasta las 10 PM / 22:00)
+                    for h in range(h_inicio, h_fin + 1):
+                        if 6 <= h <= 22: 
+                            if horario_grid[h][d_idx]:
+                                horario_grid[h][d_idx] += f"<br>---<br>**{dept}**"
+                            else:
+                                horario_grid[h][d_idx] = f"**{dept} {num}**<br>({periodo})"
+                except:
+                    continue
+
+    # --- ESCRIBIR README ---
+    with open(README_FILE, "w", encoding="utf-8") as f:
+        f.write(f"# 🗓️ Mi Horario Uniandes - Multisemestre\n")
+        f.write(f"Actualizado: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}\n\n")
+        
+        f.write("### 🕒 Cuadrícula Semanal (Unificada)\n\n")
         f.write("| Hora | L | M | W | I | V | S |\n")
         f.write("| :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n")
         
-        for h in range(7, 21): # De 7 AM a 8 PM
+        for h in range(7, 23): # Tabla de 7 AM a 10 PM
             fila = [f"{h}:00"]
             for d_idx in range(6):
-                celda = horario_grid[h].get(d_idx, " ")
-                fila.append(celda)
+                fila.append(horario_grid[h].get(d_idx, " "))
             f.write("| " + " | ".join(fila) + " |\n")
         
-        f.write("\n---\n### 📄 Detalle de Materias\n")
+        f.write("\n---\n### 📄 Detalle de Materias Encontradas\n")
         for c in lista_detalles:
-            f.write(f"- **{c.get('class')} {c.get('course_number')}:** {c.get('course_title')} (NRC: {c.get('nrc')})\n")
-            for s in c.get('schedules', []):
-                f.write(f"  - {s.get('day')} {s.get('time')} en {s.get('location')}\n")
+            f.write(f"#### {c['dept']} {c['num']} - {c['titulo']} (NRC: {c['nrc']})\n")
+            f.write(f"- **Periodo:** {c['periodo']}\n")
+            schs = c['raw'].get('schedules') or c['raw'].get('schedule') or []
+            if isinstance(schs, dict): schs = [schs]
+            for s in schs:
+                dia = s.get('day') or s.get('days') or "?"
+                hora = s.get('time') or s.get('hour') or "?"
+                salon = s.get('location') or s.get('room') or "TBA"
+                f.write(f"  - 🕒 {dia}: {hora} | 📍 {salon}\n")
 
 if __name__ == "__main__":
     generar_horario()
