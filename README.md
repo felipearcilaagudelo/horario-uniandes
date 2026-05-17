@@ -1,310 +1,43 @@
-# 🛠️ Diagnóstico de Horario
+# 🗓️ Mi Horario Uniandes
+Actualizado: 17/05/2026 14:25
 
-### 📦 Datos para NRC 10192 (202618)
-**Nombre:** IIND None - None
+### 🕒 Cuadrícula Semanal
 
-#### Etiquetas encontradas en este curso:
-```json
-[
-  "llave",
-  "nrc",
-  "class",
-  "course",
-  "section",
-  "credits",
-  "title",
-  "maxenrol",
-  "enrolled",
-  "term",
-  "ptrm",
-  "ptrmdesc",
-  "seatsavail",
-  "campus",
-  "projenrl",
-  "schedules",
-  "instructors",
-  "levele",
-  "comments",
-  "attr"
-]
-```
-
-#### Contenido de la sección de horario:
-```json
-[
-  {
-    "time_ini": "1800",
-    "time_fin": "2050",
-    "classroom": "- -",
-    "l": "L",
-    "m": "M",
-    "i": "I",
-    "j": "J",
-    "v": "V",
-    "s": null,
-    "d": null,
-    "date_ini": "2026-07-13 00:00:00",
-    "date_fin": "2026-07-17 00:00:00",
-    "building": "- -",
-    "patron": "1"
-  },
-  {
-    "time_ini": "0800",
-    "time_fin": "0950",
-    "classroom": "- -",
-    "l": null,
-    "m": null,
-    "i": null,
-    "j": null,
-    "v": null,
-    "s": "S",
-    "d": null,
-    "date_ini": "2026-07-18 00:00:00",
-    "date_fin": "2026-07-18 00:00:00",
-    "building": "- -",
-    "patron": "6"
-  },
-  {
-    "time_ini": "1700",
-    "time_fin": "2050",
-    "classroom": "- -",
-    "l": null,
-    "m": "M",
-    "i": "I",
-    "j": "J",
-    "v": "V",
-    "s": null,
-    "d": null,
-    "date_ini": "2026-07-21 00:00:00",
-    "date_fin": "2026-07-24 00:00:00",
-    "building": "- -",
-    "patron": "2"
-  },
-  {
-    "time_ini": "0900",
-    "time_fin": "1150",
-    "classroom": "- -",
-    "l": null,
-    "m": null,
-    "i": null,
-    "j": null,
-    "v": null,
-    "s": "S",
-    "d": null,
-    "date_ini": "2026-07-25 00:00:00",
-    "date_fin": "2026-07-25 00:00:00",
-    "building": "- -",
-    "patron": "6"
-  }
-]
-```
+| Hora | L | M | W | J | V | S |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 7:00 |   |   |   |   |   |   |
+| 8:00 |   |   |   |   |   | **IIND 4131** |
+| 9:00 |   | **IIND 2206** | **IIND 2206** | **IIND 2206** | **IIND 2206T** | **IIND 4131** |
+| 10:00 |   | **IIND 2206** | **IIND 2206** | **IIND 2206** | **IIND 2206T** | **IIND 4131** |
+| 11:00 | **IIND 3113** | **IIND 3113** | **IIND 3113T** | **IIND 3113** | **IIND 3113T** | **IIND 4131** |
+| 12:00 | **IIND 3113** | **IIND 3113** | **IIND 3113T** | **IIND 3113** | **IIND 3113T** |   |
+| 13:00 |   |   |   |   |   |   |
+| 14:00 |   |   |   |   |   |   |
+| 15:00 |   |   |   |   |   |   |
+| 16:00 |   |   |   |   |   |   |
+| 17:00 |   | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** |   |
+| 18:00 | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** |   |
+| 19:00 | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** |   |
+| 20:00 | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** | **IIND 4131** |   |
+| 21:00 |   |   |   |   |   |   |
 
 ---
-### 📦 Datos para NRC 10106 (202619)
-**Nombre:** IIND None - None
-
-#### Etiquetas encontradas en este curso:
-```json
-[
-  "llave",
-  "nrc",
-  "class",
-  "course",
-  "section",
-  "credits",
-  "title",
-  "maxenrol",
-  "enrolled",
-  "term",
-  "ptrm",
-  "ptrmdesc",
-  "seatsavail",
-  "campus",
-  "projenrl",
-  "schedules",
-  "instructors",
-  "levele",
-  "comments",
-  "attr"
-]
-```
-
-#### Contenido de la sección de horario:
-```json
-[
-  {
-    "time_ini": "1100",
-    "time_fin": "1250",
-    "classroom": "- -",
-    "l": "L",
-    "m": "M",
-    "i": null,
-    "j": "J",
-    "v": null,
-    "s": null,
-    "d": null,
-    "date_ini": "2026-06-01 00:00:00",
-    "date_fin": "2026-07-25 00:00:00",
-    "building": "- -",
-    "patron": "1"
-  }
-]
-```
-
----
-### 📦 Datos para NRC 12163 (202619)
-**Nombre:** IIND None - None
-
-#### Etiquetas encontradas en este curso:
-```json
-[
-  "llave",
-  "nrc",
-  "class",
-  "course",
-  "section",
-  "credits",
-  "title",
-  "maxenrol",
-  "enrolled",
-  "term",
-  "ptrm",
-  "ptrmdesc",
-  "seatsavail",
-  "campus",
-  "projenrl",
-  "schedules",
-  "instructors",
-  "levele",
-  "comments",
-  "attr"
-]
-```
-
-#### Contenido de la sección de horario:
-```json
-[
-  {
-    "time_ini": "1100",
-    "time_fin": "1220",
-    "classroom": "- -",
-    "l": null,
-    "m": null,
-    "i": "I",
-    "j": null,
-    "v": "V",
-    "s": null,
-    "d": null,
-    "date_ini": "2026-06-01 00:00:00",
-    "date_fin": "2026-07-25 00:00:00",
-    "building": "- -",
-    "patron": "3"
-  }
-]
-```
-
----
-### 📦 Datos para NRC 13465 (202619)
-**Nombre:** IIND None - None
-
-#### Etiquetas encontradas en este curso:
-```json
-[
-  "llave",
-  "nrc",
-  "class",
-  "course",
-  "section",
-  "credits",
-  "title",
-  "maxenrol",
-  "enrolled",
-  "term",
-  "ptrm",
-  "ptrmdesc",
-  "seatsavail",
-  "campus",
-  "projenrl",
-  "schedules",
-  "instructors",
-  "levele",
-  "comments",
-  "attr"
-]
-```
-
-#### Contenido de la sección de horario:
-```json
-[
-  {
-    "time_ini": "0900",
-    "time_fin": "1050",
-    "classroom": "- -",
-    "l": null,
-    "m": "M",
-    "i": "I",
-    "j": "J",
-    "v": null,
-    "s": null,
-    "d": null,
-    "date_ini": "2026-06-01 00:00:00",
-    "date_fin": "2026-07-25 00:00:00",
-    "building": "- -",
-    "patron": "2"
-  }
-]
-```
-
----
-### 📦 Datos para NRC 13466 (202619)
-**Nombre:** IIND None - None
-
-#### Etiquetas encontradas en este curso:
-```json
-[
-  "llave",
-  "nrc",
-  "class",
-  "course",
-  "section",
-  "credits",
-  "title",
-  "maxenrol",
-  "enrolled",
-  "term",
-  "ptrm",
-  "ptrmdesc",
-  "seatsavail",
-  "campus",
-  "projenrl",
-  "schedules",
-  "instructors",
-  "levele",
-  "comments",
-  "attr"
-]
-```
-
-#### Contenido de la sección de horario:
-```json
-[
-  {
-    "time_ini": "0900",
-    "time_fin": "1050",
-    "classroom": "- -",
-    "l": null,
-    "m": null,
-    "i": null,
-    "j": null,
-    "v": "V",
-    "s": null,
-    "d": null,
-    "date_ini": "2026-06-01 00:00:00",
-    "date_fin": "2026-07-25 00:00:00",
-    "building": "- -",
-    "patron": "5"
-  }
-]
-```
-
----
+### 📄 Detalle de Materias
+#### IIND 4131 - MASTERING MACH LEARN GENER MOD (NRC: 10192)
+- **Periodo:** 202618
+  - 🕒 LMIJV: 1800-2050 | 📍 - - - -
+  - 🕒 S: 0800-0950 | 📍 - - - -
+  - 🕒 MIJV: 1700-2050 | 📍 - - - -
+  - 🕒 S: 0900-1150 | 📍 - - - -
+#### IIND 3113 - SIMULACION EVENTOS DISCRETOS (NRC: 10106)
+- **Periodo:** 202619
+  - 🕒 LMJ: 1100-1250 | 📍 - - - -
+#### IIND 3113T - TRABAJO ASISTIDO SIMULACION EVENTOS DISCRETOS (NRC: 12163)
+- **Periodo:** 202619
+  - 🕒 IV: 1100-1220 | 📍 - - - -
+#### IIND 2206 - INGENIERÍA DE CADENA DE SUMINISTRO (NRC: 13465)
+- **Periodo:** 202619
+  - 🕒 MIJ: 0900-1050 | 📍 - - - -
+#### IIND 2206T - TRABAJO ASISTIDO INGENÍERIA DE CADENA DE SUMINISTRO (NRC: 13466)
+- **Periodo:** 202619
+  - 🕒 V: 0900-1050 | 📍 - - - -
