@@ -1,7 +1,7 @@
-# 🗓️ Mi Horario Uniandes - Multisemestre
-Actualizado: 17/05/2026 14:16
+# 🗓️ Mi Horario Uniandes
+Actualizado: 17/05/2026 14:20
 
-### 🕒 Cuadrícula Semanal (Unificada)
+### 🕒 Vista Semanal
 
 | Hora | L | M | W | I | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -23,22 +23,22 @@ Actualizado: 17/05/2026 14:16
 | 22:00 |   |   |   |   |   |   |
 
 ---
-### 📄 Detalle de Materias Encontradas
+### 📄 Detalle de las Materias
 #### IIND 4131 - MASTERING MACH LEARN GENER MOD (NRC: 10192)
-- **Periodo:** 202618
-  - 🕒 ?: ? | 📍 TBA
-  - 🕒 ?: ? | 📍 TBA
-  - 🕒 ?: ? | 📍 TBA
-  - 🕒 ?: ? | 📍 TBA
+- **Semestre:** 202618
+  - 🕒 ?: ? | 📍 - -
+  - 🕒 ?: ? | 📍 - -
+  - 🕒 ?: ? | 📍 - -
+  - 🕒 ?: ? | 📍 - -
 #### IIND 3113 - SIMULACION EVENTOS DISCRETOS (NRC: 10106)
-- **Periodo:** 202619
-  - 🕒 ?: ? | 📍 TBA
+- **Semestre:** 202619
+  - 🕒 ?: ? | 📍 - -
 #### IIND 3113T - TRABAJO ASISTIDO SIMULACION EVENTOS DISCRETOS (NRC: 12163)
-- **Periodo:** 202619
-  - 🕒 ?: ? | 📍 TBA
+- **Semestre:** 202619
+  - 🕒 ?: ? | 📍 - -
 #### IIND 2206 - INGENIERÍA DE CADENA DE SUMINISTRO (NRC: 13465)
-- **Periodo:** 202619
-  - 🕒 ?: ? | 📍 TBA
+- **Semestre:** 202619
+  - 🕒 ?: ? | 📍 - -
 #### IIND 2206T - TRABAJO ASISTIDO INGENÍERIA DE CADENA DE SUMINISTRO (NRC: 13466)
-- **Periodo:** 202619
-  - 🕒 ?: ? | 📍 TBA
+- **Semestre:** 202619
+  - 🕒 ?: ? | 📍 - -
