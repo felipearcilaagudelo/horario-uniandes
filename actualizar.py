@@ -3,17 +3,19 @@ import datetime
 from collections import defaultdict
 
 # --- CONFIGURACIÓN ---
-PERIODO = "202618" # Cambia esto cada semestre
+PERIODO = "202618" 
 ARCHIVO_LISTA = "mis_clases.txt"
 README_FILE = "README.md"
 # ---------------------
 
 def buscar_datos(query):
+    # La API pública de Uniandes
     url = f"https://ofertadecursos.uniandes.edu.co/api/courses?term={PERIODO}&p_numb={query}"
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
     try:
         r = requests.get(url, headers=headers, timeout=15)
         data = r.json()
+        # La API puede devolver una lista directa o un objeto con la llave 'courses'
         return data if isinstance(data, list) else data.get('courses', [])
     except Exception as e:
         print(f"Error buscando {query}: {e}")
@@ -27,12 +29,19 @@ def generar_reporte():
         busquedas = []
 
     materias_agrupadas = defaultdict(list)
+    
     for item in busquedas:
         print(f"Buscando: {item}...")
         resultados = buscar_datos(item)
         for curso in resultados:
-            nombre = f"{curso.get('class')} - {curso.get('course_title')}"
-            materias_agrupadas[nombre].append(curso)
+            # Intentamos obtener el nombre de varias formas por si la API cambia
+            cod_dept = curso.get('class', '')
+            cod_num = curso.get('course_number', '') or curso.get('course', '')
+            titulo = curso.get('course_title') or curso.get('title') or curso.get('courseTitle') or "Materia sin nombre"
+            
+            # Creamos una llave única: "ISIS 1404 - SENSORES"
+            nombre_completo = f"{cod_dept} {cod_num} - {titulo}"
+            materias_agrupadas[nombre_completo].append(curso)
 
     with open(README_FILE, "w", encoding="utf-8") as f:
         f.write(f"# 🛰️ Monitor de Oferta Uniandes\n")
@@ -40,9 +49,11 @@ def generar_reporte():
         f.write("Pulsa en cada materia para ver sus secciones y cupos:\n\n")
         
         if not materias_agrupadas:
-            f.write("⚠️ No se encontraron materias. Revisa tu archivo mis_clases.txt")
+            f.write("⚠️ No se encontraron materias. Revisa que los códigos en `mis_clases.txt` sean correctos.")
         
-        for nombre_materia, secciones in materias_agrupadas.items():
+        # Ordenamos las materias alfabéticamente
+        for nombre_materia in sorted(materias_agrupadas.keys()):
+            secciones = materias_agrupadas[nombre_materia]
             f.write(f"<details>\n<summary><b>{nombre_materia} ({len(secciones)} secciones)</b></summary>\n\n")
             f.write("| Sec | NRC | Horario | Salón | Profesor | Cupos |\n")
             f.write("| :--- | :--- | :--- | :--- | :--- | :--- |\n")
@@ -56,8 +67,12 @@ def generar_reporte():
                 disp = cupos_max - cupos_act
                 
                 status = "🟢" if disp > 0 else "🔴"
-                h_list = [f"{h.get('day')}: {h.get('time')}" for h in s.get('schedules', [])]
-                l_list = [h.get('location', 'N/A') for h in s.get('schedules', [])]
+                if 0 < disp <= 3: status = "🟡"
+                
+                # Horarios y salones
+                schedules = s.get('schedules', [])
+                h_list = [f"{h.get('day', '')}: {h.get('time', '')}" for h in schedules]
+                l_list = [h.get('location', 'N/A') for h in schedules]
                 
                 f.write(f"| {sec} | {nrc} | {'<br>'.join(h_list)} | {'<br>'.join(l_list)} | {profe} | {status} {disp}/{cupos_max} |\n")
             f.write("\n</details>\n\n")
