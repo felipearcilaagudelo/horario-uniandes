@@ -6,11 +6,11 @@ from collections import defaultdict
 PERIODOS = ["202618", "202619"] 
 ARCHIVO_LISTA = "mis_clases.txt"
 README_FILE = "README.md"
+HTML_FILE = "index.html"
 
-# Mapeo según lo que vimos en el diagnóstico
-# l=Lunes, m=Martes, i=Miércoles, j=Jueves, v=Viernes, s=Sábado
 DIAS_API = {'l': 0, 'm': 1, 'i': 2, 'j': 3, 'v': 4, 's': 5}
 DIAS_NOMBRES = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
+COLORES = ["#3498db", "#e74c3c", "#2ecc71", "#f1c40f", "#9b59b6", "#1abc9c", "#e67e22", "#34495e"]
 
 def buscar_nrc(nrc):
     headers = {'User-Agent': 'Mozilla/5.0'}
@@ -33,41 +33,72 @@ def generar():
             nrcs = [line.strip() for line in f if line.strip()]
     except: return
 
-    horario_grid = defaultdict(lambda: defaultdict(str))
+    horario_grid = defaultdict(lambda: defaultdict(list))
     detalles = []
 
-    for nrc in nrcs:
+    for idx, nrc in enumerate(nrcs):
         c = buscar_nrc(nrc)
         if not c: continue
 
-        # Extraer datos según el nuevo formato
         dept = c.get('class', '???')
         num = c.get('course', '???')
-        titulo = c.get('title', 'Materia')
-        p_enc = c.get('periodo_encontrado')
+        titulo = (c.get('title') or "Materia").title()
+        color = COLORES[idx % len(COLORES)]
         
-        detalles.append({'dept': dept, 'num': num, 'titulo': titulo, 'nrc': nrc, 'p': p_enc, 'raw': c})
+        materia_info = {'dept': dept, 'num': num, 'titulo': titulo, 'nrc': nrc, 'color': color}
+        detalles.append(materia_info)
 
-        # Procesar horarios con el nuevo formato de columnas (l, m, i, j, v, s)
-        schedules = c.get('schedules', [])
-        for s in schedules:
-            t_ini = s.get('time_ini')
-            t_fin = s.get('time_fin')
-            
+        for s in c.get('schedules', []):
+            t_ini, t_fin = s.get('time_ini'), s.get('time_fin')
             if t_ini and t_fin:
-                h_inicio = int(t_ini[:2])
-                h_fin = int(t_fin[:2])
-                
-                # Revisar cada columna de día
+                h_ini, h_fin = int(t_ini[:2]), int(t_fin[:2])
                 for dia_key, col_idx in DIAS_API.items():
-                    if s.get(dia_key): # Si el valor no es null (ej: "L", "M", "S")
-                        for h in range(h_inicio, h_fin + 1):
+                    if s.get(dia_key):
+                        for h in range(h_ini, h_fin + 1):
                             if 7 <= h <= 21:
-                                if horario_grid[h][col_idx]:
-                                    if dept not in horario_grid[h][col_idx]:
-                                        horario_grid[h][col_idx] += f"<br>---<br>**{dept}**"
-                                else:
-                                    horario_grid[h][col_idx] = f"**{dept} {num}**"
+                                horario_grid[h][col_idx].append(materia_info)
+
+    # --- GENERAR HTML (PARA GITHUB PAGES) ---
+    html = f"""<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Horario Uniandes</title>
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }}
+    .container {{ max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }}
+    h1 {{ text-align: center; color: #1a1a1a; margin-bottom: 5px; }}
+    .update {{ text-align: center; color: #666; font-size: 0.8em; margin-bottom: 20px; }}
+    table {{ width: 100%; border-collapse: collapse; table-layout: fixed; }}
+    th {{ background: #1a1a1a; color: white; padding: 12px; font-size: 0.9em; }}
+    td {{ border: 1px solid #e0e0e0; height: 60px; vertical-align: top; padding: 4px; position: relative; }}
+    .time-col {{ background: #f8f9fa; font-weight: bold; width: 60px; text-align: center; vertical-align: middle; font-size: 0.8em; }}
+    .event {{ border-radius: 4px; padding: 4px; color: white; font-size: 0.7em; font-weight: bold; margin-bottom: 2px; line-height: 1.1; }}
+    .footer {{ margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }}
+    .materia-item {{ display: inline-block; margin-right: 15px; font-size: 0.8em; }}
+    .dot {{ height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }}
+</style></head>
+<body><div class="container">
+    <h1>🗓️ Mi Horario Uniandes</h1>
+    <div class="update">Actualizado: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}</div>
+    <table><thead><tr><th style="width:70px">Hora</th><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th></tr></thead><tbody>"""
+
+    for h in range(7, 22):
+        html += f"<tr><td class='time-col'>{h}:00</td>"
+        for d_idx in range(6):
+            html += "<td>"
+            for m in horario_grid[h][d_idx]:
+                html += f"<div class='event' style='background:{m['color']}'>{m['dept']}{m['num']}<br>{m['nrc']}</div>"
+            html += "</td>"
+        html += "</tr>"
+
+    html += """</tbody></table><div class="footer">"""
+    for d in detalles:
+        html += f"<div class='materia-item'><span class='dot' style='background:{d['color']}'></span><b>{d['dept']}{d['num']}</b>: {d['titulo']} ({d['nrc']})</div>"
+    html += "</div></div></body></html>"
+
+    with open(HTML_FILE, "w", encoding="utf-8") as f: f.write(html)
+
+    # --- (Opcional) Mantenemos el README actualizado también ---
+    # ... (Si quieres puedes poner aquí el código del README anterior para tener ambos)
 
     # --- ESCRIBIR README ---
     with open(README_FILE, "w", encoding="utf-8") as f:
