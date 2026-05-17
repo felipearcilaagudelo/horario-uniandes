@@ -1,44 +1,310 @@
-# 🗓️ Mi Horario Uniandes
-Actualizado: 17/05/2026 14:20
+# 🛠️ Diagnóstico de Horario
 
-### 🕒 Vista Semanal
+### 📦 Datos para NRC 10192 (202618)
+**Nombre:** IIND None - None
 
-| Hora | L | M | W | I | V | S |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| 7:00 |   |   |   |   |   |   |
-| 8:00 |   |   |   |   |   |   |
-| 9:00 |   |   |   |   |   |   |
-| 10:00 |   |   |   |   |   |   |
-| 11:00 |   |   |   |   |   |   |
-| 12:00 |   |   |   |   |   |   |
-| 13:00 |   |   |   |   |   |   |
-| 14:00 |   |   |   |   |   |   |
-| 15:00 |   |   |   |   |   |   |
-| 16:00 |   |   |   |   |   |   |
-| 17:00 |   |   |   |   |   |   |
-| 18:00 |   |   |   |   |   |   |
-| 19:00 |   |   |   |   |   |   |
-| 20:00 |   |   |   |   |   |   |
-| 21:00 |   |   |   |   |   |   |
-| 22:00 |   |   |   |   |   |   |
+#### Etiquetas encontradas en este curso:
+```json
+[
+  "llave",
+  "nrc",
+  "class",
+  "course",
+  "section",
+  "credits",
+  "title",
+  "maxenrol",
+  "enrolled",
+  "term",
+  "ptrm",
+  "ptrmdesc",
+  "seatsavail",
+  "campus",
+  "projenrl",
+  "schedules",
+  "instructors",
+  "levele",
+  "comments",
+  "attr"
+]
+```
+
+#### Contenido de la sección de horario:
+```json
+[
+  {
+    "time_ini": "1800",
+    "time_fin": "2050",
+    "classroom": "- -",
+    "l": "L",
+    "m": "M",
+    "i": "I",
+    "j": "J",
+    "v": "V",
+    "s": null,
+    "d": null,
+    "date_ini": "2026-07-13 00:00:00",
+    "date_fin": "2026-07-17 00:00:00",
+    "building": "- -",
+    "patron": "1"
+  },
+  {
+    "time_ini": "0800",
+    "time_fin": "0950",
+    "classroom": "- -",
+    "l": null,
+    "m": null,
+    "i": null,
+    "j": null,
+    "v": null,
+    "s": "S",
+    "d": null,
+    "date_ini": "2026-07-18 00:00:00",
+    "date_fin": "2026-07-18 00:00:00",
+    "building": "- -",
+    "patron": "6"
+  },
+  {
+    "time_ini": "1700",
+    "time_fin": "2050",
+    "classroom": "- -",
+    "l": null,
+    "m": "M",
+    "i": "I",
+    "j": "J",
+    "v": "V",
+    "s": null,
+    "d": null,
+    "date_ini": "2026-07-21 00:00:00",
+    "date_fin": "2026-07-24 00:00:00",
+    "building": "- -",
+    "patron": "2"
+  },
+  {
+    "time_ini": "0900",
+    "time_fin": "1150",
+    "classroom": "- -",
+    "l": null,
+    "m": null,
+    "i": null,
+    "j": null,
+    "v": null,
+    "s": "S",
+    "d": null,
+    "date_ini": "2026-07-25 00:00:00",
+    "date_fin": "2026-07-25 00:00:00",
+    "building": "- -",
+    "patron": "6"
+  }
+]
+```
 
 ---
-### 📄 Detalle de las Materias
-#### IIND 4131 - MASTERING MACH LEARN GENER MOD (NRC: 10192)
-- **Semestre:** 202618
-  - 🕒 ?: ? | 📍 - -
-  - 🕒 ?: ? | 📍 - -
-  - 🕒 ?: ? | 📍 - -
-  - 🕒 ?: ? | 📍 - -
-#### IIND 3113 - SIMULACION EVENTOS DISCRETOS (NRC: 10106)
-- **Semestre:** 202619
-  - 🕒 ?: ? | 📍 - -
-#### IIND 3113T - TRABAJO ASISTIDO SIMULACION EVENTOS DISCRETOS (NRC: 12163)
-- **Semestre:** 202619
-  - 🕒 ?: ? | 📍 - -
-#### IIND 2206 - INGENIERÍA DE CADENA DE SUMINISTRO (NRC: 13465)
-- **Semestre:** 202619
-  - 🕒 ?: ? | 📍 - -
-#### IIND 2206T - TRABAJO ASISTIDO INGENÍERIA DE CADENA DE SUMINISTRO (NRC: 13466)
-- **Semestre:** 202619
-  - 🕒 ?: ? | 📍 - -
+### 📦 Datos para NRC 10106 (202619)
+**Nombre:** IIND None - None
+
+#### Etiquetas encontradas en este curso:
+```json
+[
+  "llave",
+  "nrc",
+  "class",
+  "course",
+  "section",
+  "credits",
+  "title",
+  "maxenrol",
+  "enrolled",
+  "term",
+  "ptrm",
+  "ptrmdesc",
+  "seatsavail",
+  "campus",
+  "projenrl",
+  "schedules",
+  "instructors",
+  "levele",
+  "comments",
+  "attr"
+]
+```
+
+#### Contenido de la sección de horario:
+```json
+[
+  {
+    "time_ini": "1100",
+    "time_fin": "1250",
+    "classroom": "- -",
+    "l": "L",
+    "m": "M",
+    "i": null,
+    "j": "J",
+    "v": null,
+    "s": null,
+    "d": null,
+    "date_ini": "2026-06-01 00:00:00",
+    "date_fin": "2026-07-25 00:00:00",
+    "building": "- -",
+    "patron": "1"
+  }
+]
+```
+
+---
+### 📦 Datos para NRC 12163 (202619)
+**Nombre:** IIND None - None
+
+#### Etiquetas encontradas en este curso:
+```json
+[
+  "llave",
+  "nrc",
+  "class",
+  "course",
+  "section",
+  "credits",
+  "title",
+  "maxenrol",
+  "enrolled",
+  "term",
+  "ptrm",
+  "ptrmdesc",
+  "seatsavail",
+  "campus",
+  "projenrl",
+  "schedules",
+  "instructors",
+  "levele",
+  "comments",
+  "attr"
+]
+```
+
+#### Contenido de la sección de horario:
+```json
+[
+  {
+    "time_ini": "1100",
+    "time_fin": "1220",
+    "classroom": "- -",
+    "l": null,
+    "m": null,
+    "i": "I",
+    "j": null,
+    "v": "V",
+    "s": null,
+    "d": null,
+    "date_ini": "2026-06-01 00:00:00",
+    "date_fin": "2026-07-25 00:00:00",
+    "building": "- -",
+    "patron": "3"
+  }
+]
+```
+
+---
+### 📦 Datos para NRC 13465 (202619)
+**Nombre:** IIND None - None
+
+#### Etiquetas encontradas en este curso:
+```json
+[
+  "llave",
+  "nrc",
+  "class",
+  "course",
+  "section",
+  "credits",
+  "title",
+  "maxenrol",
+  "enrolled",
+  "term",
+  "ptrm",
+  "ptrmdesc",
+  "seatsavail",
+  "campus",
+  "projenrl",
+  "schedules",
+  "instructors",
+  "levele",
+  "comments",
+  "attr"
+]
+```
+
+#### Contenido de la sección de horario:
+```json
+[
+  {
+    "time_ini": "0900",
+    "time_fin": "1050",
+    "classroom": "- -",
+    "l": null,
+    "m": "M",
+    "i": "I",
+    "j": "J",
+    "v": null,
+    "s": null,
+    "d": null,
+    "date_ini": "2026-06-01 00:00:00",
+    "date_fin": "2026-07-25 00:00:00",
+    "building": "- -",
+    "patron": "2"
+  }
+]
+```
+
+---
+### 📦 Datos para NRC 13466 (202619)
+**Nombre:** IIND None - None
+
+#### Etiquetas encontradas en este curso:
+```json
+[
+  "llave",
+  "nrc",
+  "class",
+  "course",
+  "section",
+  "credits",
+  "title",
+  "maxenrol",
+  "enrolled",
+  "term",
+  "ptrm",
+  "ptrmdesc",
+  "seatsavail",
+  "campus",
+  "projenrl",
+  "schedules",
+  "instructors",
+  "levele",
+  "comments",
+  "attr"
+]
+```
+
+#### Contenido de la sección de horario:
+```json
+[
+  {
+    "time_ini": "0900",
+    "time_fin": "1050",
+    "classroom": "- -",
+    "l": null,
+    "m": null,
+    "i": null,
+    "j": null,
+    "v": "V",
+    "s": null,
+    "d": null,
+    "date_ini": "2026-06-01 00:00:00",
+    "date_fin": "2026-07-25 00:00:00",
+    "building": "- -",
+    "patron": "5"
+  }
+]
+```
+
+---
