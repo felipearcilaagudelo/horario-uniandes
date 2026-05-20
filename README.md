@@ -1,12 +1,12 @@
 # 🗓️ Mi Horario Uniandes
-Actualizado: 20/05/2026 20:03
+Actualizado: 20/05/2026 22:09
 
 | Hora | L | M | W | J | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | 7:00 |   |   |   |   |   |   |
 | 8:00 |   |   |   |   |   | **IIND** |
-| 9:00 |   | **IIND** | **IIND** | **IIND** | **IIND** | **IIND**<br>**IIND** |
-| 10:00 |   | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** |
+| 9:00 |   | **IIND** | **IIND** | **IIND**<br>**IIND** | **IIND** | **IIND**<br>**IIND** |
+| 10:00 |   | **IIND** | **IIND** | **IIND**<br>**IIND** | **IIND** | **IIND** |
 | 11:00 | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** |
 | 12:00 | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** |   |
 | 13:00 |   |   |   |   |   |   |
