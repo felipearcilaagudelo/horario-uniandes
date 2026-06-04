@@ -3,8 +3,7 @@ import datetime
 from collections import defaultdict
 
 # --- CONFIGURACIÓN ---
-# He agregado 2025 por si acaso los NRCs son del año pasado
-PERIODOS = ["202619", "202618", "202610", "202620"] 
+PERIODOS = ["202619", "202618", "202610", "202620", "202519", "202520"] 
 ARCHIVO_LISTA = "mis_clases.txt"
 README_FILE = "README.md"
 HTML_FILE = "index.html"
@@ -18,6 +17,7 @@ def buscar_nrc(nrc):
         url = f"https://ofertadecursos.uniandes.edu.co/api/courses?term={p}&p_numb={nrc}"
         try:
             r = requests.get(url, headers=headers, timeout=10)
+            if r.status_code != 200: continue
             data = r.json()
             cursos = data if isinstance(data, list) else data.get('courses', [])
             for c in cursos:
@@ -57,21 +57,22 @@ def generar():
         for s in schedules:
             t_ini, t_fin = s.get('time_ini'), s.get('time_fin')
             if t_ini and t_fin and t_ini != "TBA":
-                info['tiene_horario'] = True
-                h_ini, h_fin = int(t_ini[:2]), int(t_fin[:2])
-                for dia_key, col_idx in DIAS_API.items():
-                    if s.get(dia_key):
-                        for h in range(h_ini, h_fin + 1):
-                            if 7 <= h <= 21:
-                                horario_grid[h][col_idx].append(info)
+                try:
+                    h_ini = int(str(t_ini)[:2])
+                    h_fin = int(str(t_fin)[:2])
+                    info['tiene_horario'] = True
+                    for dia_key, col_idx in DIAS_API.items():
+                        if s.get(dia_key):
+                            for h in range(h_ini, h_fin + 1):
+                                if 7 <= h <= 21:
+                                    horario_grid[h][col_idx].append(info)
+                except: continue
         
         encontrados.append(info)
 
-    # ESCRIBIR README
+    # ESCRIBIR README.md
     with open(README_FILE, "w", encoding="utf-8") as f:
         f.write(f"# 🗓️ Mi Horario Uniandes\nActualizado: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}\n\n")
-        
-        # Tabla
         f.write("| Hora | L | M | W | J | V | S |\n| :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n")
         for h in range(7, 22):
             fila = [f"{h}:00"]
@@ -85,15 +86,28 @@ def generar():
         for m in encontrados:
             status = "✅ Encontrada" if m['tiene_horario'] else "⚠️ Sin horario asignado (Virtual/TBA)"
             f.write(f"- **{m['dept']}{m['num']}** ({m['nrc']}): {status} [Periodo: {m['p']}]\n")
-        
         for nrc in no_encontrados:
-            f.write(f"- **NRC {nrc}**: ❌ No se encontró en ningún periodo (2025/2026).\n")
+            f.write(f"- **NRC {nrc}**: ❌ No se encontró en ningún periodo configurado.\n")
 
-    # GENERAR HTML (Web)
+    # GENERAR HTML
     html = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Horario</title>
     <style>body {{ font-family: sans-serif; background: #f0f2f5; padding: 20px; }}
     .card {{ background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 900px; margin: auto; }}
     table {{ width: 100%; border-collapse: collapse; }} th {{ background: #1a1a1a; color: white; padding: 10px; }}
-    td {{ border: 1px solid #ddd; height: 50px; text-align: center; vertical-align: top; padding: 4px; }}
+    td {{ border: 1px solid #ddd; height: 50px; text-align: center; vertical-align: top; padding: 4px; width: 14%; }}
     .event {{ border-radius: 4px; padding: 3px; color: white; font-size: 10px; font-weight: bold; margin-bottom: 2px; }}
-    </style></head
+    </style></head>
+    <body><div class="card"><h2>🗓️ Mi Horario</h2><table><thead><tr><th>Hora</th><th>L</th><th>M</th><th>W</th><th>J</th><th>V</th><th>S</th></tr></thead><tbody>"""
+    for h in range(7, 22):
+        html += f"<tr><td style='background:#eee; font-weight:bold'>{h}:00</td>"
+        for d_idx in range(6):
+            html += "<td>"
+            for m in horario_grid[h][d_idx]:
+                html += f"<div class='event' style='background:{m['color']}'>{m['dept']}{m['num']}</div>"
+            html += "</td>"
+        html += "</tr>"
+    html += "</tbody></table></div></body></html>"
+    with open(HTML_FILE, "w", encoding="utf-8") as f: f.write(html)
+
+if __name__ == "__main__":
+    generar()
