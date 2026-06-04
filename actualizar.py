@@ -3,7 +3,7 @@ import datetime
 from collections import defaultdict
 
 # --- CONFIGURACIÓN ---
-PERIODOS = ["202618", "202619"] 
+PERIODOS = ["202618", "202619", "202620"] 
 ARCHIVO_LISTA = "mis_clases.txt"
 README_FILE = "README.md"
 HTML_FILE = "index.html"
