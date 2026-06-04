@@ -1,20 +1,20 @@
 # 🗓️ Mi Horario Uniandes
-Actualizado: 04/06/2026 22:05
+Actualizado: 04/06/2026 22:15
 
 | Hora | L | M | W | J | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | 7:00 |   |   |   |   |   |   |
-| 8:00 |   |   |   |   |   | **IIND** |
-| 9:00 |   | **IIND** | **IIND** | **IIND**<br>**IIND** | **IIND** | **IIND**<br>**IIND** |
-| 10:00 |   | **IIND** | **IIND** | **IIND**<br>**IIND** | **IIND** | **IIND** |
-| 11:00 | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** |
-| 12:00 | **IIND** | **IIND** | **IIND** | **IIND** | **IIND** |   |
+| 8:00 |   |   |   |   |   |   |
+| 9:00 |   |   |   |   |   |   |
+| 10:00 |   |   |   |   |   |   |
+| 11:00 |   |   |   |   |   |   |
+| 12:00 |   |   |   |   |   |   |
 | 13:00 |   |   |   |   |   |   |
 | 14:00 |   |   |   |   |   |   |
 | 15:00 |   |   |   |   |   |   |
 | 16:00 |   |   |   |   |   |   |
-| 17:00 |   | **IIND** | **IIND** | **IIND** | **IIND** |   |
-| 18:00 | **IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** |   |
-| 19:00 | **IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** |   |
-| 20:00 | **IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** | **IIND**<br>**IIND** |   |
+| 17:00 |   |   |   |   |   |   |
+| 18:00 |   |   |   |   |   |   |
+| 19:00 |   |   |   |   |   |   |
+| 20:00 |   |   |   |   |   |   |
 | 21:00 |   |   |   |   |   |   |
