@@ -2,23 +2,23 @@ name: Actualizar Horario
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Corre cada 30 minutos
-  workflow_dispatch:      # Permite correrlo manualmente
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: write         # Permiso para que el bot edite el README
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Actualizado a v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Actualizado a v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Instalar requests
         run: pip install requests
@@ -31,5 +31,5 @@ jobs:
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add .
-          git commit -m "Actualización automática de cupos" || exit 0
+          git commit -m "Actualización de horario y web" || exit 0
           git push
