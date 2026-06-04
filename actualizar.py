@@ -2,8 +2,9 @@ import requests
 import datetime
 from collections import defaultdict
 
-# --- CONFIGURACIÓN ---
-PERIODOS = ["202618", "202619", "202620"] 
+# --- CONFIGURACIÓN AMPLIADA ---
+# Agregamos más periodos posibles para encontrar esos nuevos NRC
+PERIODOS = ["202610", "202618", "202619", "202620", "202628"] 
 ARCHIVO_LISTA = "mis_clases.txt"
 README_FILE = "README.md"
 HTML_FILE = "index.html"
@@ -37,7 +38,9 @@ def generar():
 
     for idx, nrc in enumerate(nrcs):
         c = buscar_nrc(nrc)
-        if not c: continue
+        if not c:
+            print(f"⚠️ NRC {nrc} no encontrado en ningún periodo.")
+            continue
 
         info = {
             'dept': c.get('class', '???'),
@@ -59,7 +62,12 @@ def generar():
                             if 7 <= h <= 21:
                                 horario_grid[h][col_idx].append(info)
 
-    # --- GENERAR README.md ---
+    # Solo escribimos si encontramos al menos una materia
+    if not detalles:
+        with open(README_FILE, "w") as f: f.write("# ⚠️ Error\nNo se encontró ninguno de los NRC en los periodos configurados.")
+        return
+
+    # GENERAR README
     with open(README_FILE, "w", encoding="utf-8") as f:
         f.write(f"# 🗓️ Mi Horario Uniandes\nActualizado: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}\n\n")
         f.write("| Hora | L | M | W | J | V | S |\n| :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n")
@@ -67,24 +75,18 @@ def generar():
             fila = [f"{h}:00"]
             for d_idx in range(6):
                 clases = horario_grid[h][d_idx]
-                # Aquí corregimos el error: convertimos la lista de materias en un string
                 txt = "<br>".join([f"**{m['dept']}**" for m in clases]) if clases else " "
                 fila.append(txt)
             f.write("| " + " | ".join(fila) + " |\n")
 
-    # --- GENERAR index.html (Página Web) ---
-    html = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Mi Horario</title>
-    <style>
-        body {{ font-family: sans-serif; background: #f0f2f5; padding: 20px; }}
-        .card {{ background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 900px; margin: auto; }}
-        table {{ width: 100%; border-collapse: collapse; }}
-        th {{ background: #1a1a1a; color: white; padding: 10px; }}
-        td {{ border: 1px solid #ddd; height: 50px; text-align: center; vertical-align: top; padding: 4px; width: 14%; }}
-        .event {{ border-radius: 4px; padding: 3px; color: white; font-size: 10px; font-weight: bold; margin-bottom: 2px; }}
-    </style></head>
-    <body><div class="card">
-        <h2 style="text-align:center">🗓️ Mi Horario</h2>
-        <table><thead><tr><th>Hora</th><th>L</th><th>M</th><th>W</th><th>J</th><th>V</th><th>S</th></tr></thead><tbody>"""
+    # GENERAR HTML
+    html = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Horario</title>
+    <style>body {{ font-family: sans-serif; background: #f0f2f5; padding: 20px; }}
+    .card {{ background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 900px; margin: auto; }}
+    table {{ width: 100%; border-collapse: collapse; }} th {{ background: #1a1a1a; color: white; padding: 10px; }}
+    td {{ border: 1px solid #ddd; height: 55px; text-align: center; vertical-align: top; padding: 4px; width: 14%; }}
+    .event {{ border-radius: 4px; padding: 3px; color: white; font-size: 10px; font-weight: bold; margin-bottom: 2px; }}</style></head>
+    <body><div class="card"><h2 style="text-align:center">🗓️ Mi Horario</h2><table><thead><tr><th>Hora</th><th>L</th><th>M</th><th>W</th><th>J</th><th>V</th><th>S</th></tr></thead><tbody>"""
     for h in range(7, 22):
         html += f"<tr><td style='background:#eee; font-weight:bold'>{h}:00</td>"
         for d_idx in range(6):
@@ -95,8 +97,7 @@ def generar():
         html += "</tr>"
     html += "</tbody></table></div></body></html>"
     
-    with open(HTML_FILE, "w", encoding="utf-8") as f:
-        f.write(html)
+    with open(HTML_FILE, "w", encoding="utf-8") as f: f.write(html)
 
 if __name__ == "__main__":
     generar()
