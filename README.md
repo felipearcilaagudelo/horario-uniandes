@@ -1,5 +1,5 @@
 # 🗓️ Mi Horario Uniandes
-Actualizado: 04/06/2026 22:38
+Actualizado: 04/06/2026 22:44 (UTC)
 
 | Hora | L | M | W | J | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -21,8 +21,8 @@ Actualizado: 04/06/2026 22:38
 
 ---
 ### 🔍 Estado de tus NRCs:
-- **NRC 83677**: ❌ No se encontró en ningún periodo configurado.
-- **NRC 10017**: ❌ No se encontró en ningún periodo configurado.
-- **NRC 10016**: ❌ No se encontró en ningún periodo configurado.
-- **NRC 83674**: ❌ No se encontró en ningún periodo configurado.
-- **NRC 22060**: ❌ No se encontró en ningún periodo configurado.
+- **NRC 83677**: ❌ No se encontró. Verifica el número o el periodo.
+- **NRC 10017**: ❌ No se encontró. Verifica el número o el periodo.
+- **NRC 10016**: ❌ No se encontró. Verifica el número o el periodo.
+- **NRC 83674**: ❌ No se encontró. Verifica el número o el periodo.
+- **NRC 22060**: ❌ No se encontró. Verifica el número o el periodo.
