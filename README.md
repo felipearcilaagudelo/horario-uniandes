@@ -1,5 +1,5 @@
 # 🗓️ Mi Horario Uniandes
-Actualizado: 05/06/2026 13:16
+Actualizado: 05/06/2026 13:22
 
 | Hora | L | M | W | J | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -19,4 +19,5 @@ Actualizado: 05/06/2026 13:16
 | 20:00 |   |   |   |   |   |   |
 | 21:00 |   |   |   |   |   |   |
 
-⚠️ No se encontraron los NRCs. Verifica el archivo mis_clases.txt.
+
+⚠️ No se cargaron materias. Revisa tus NRCs o los periodos configurados.
