@@ -22,7 +22,7 @@ def buscar_nrc(nrc):
     
     for p in PERIODOS:
         # URL Exacta del buscador oficial
-        url = f"https://ofertadecursos.uniandes.edu.co/api/courses?term={p}&ptrm=&p_level=&p_dept=&p_subj=&p_numb={nrc}&p_instructor=&p_crse=&p_day=&p_hour=&p_hour_end="
+        url = f"https://ofertadecursos.uniandes.edu.co/#"
         try:
             time.sleep(1) # Delay para evitar bloqueos
             r = requests.get(url, headers=headers, timeout=20)
