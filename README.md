@@ -1,5 +1,5 @@
-# 🗓️ Horario Uniandes
-Actualizado: 05/06/2026 12:59
+# 🗓️ Mi Horario Uniandes
+Actualizado: 05/06/2026 13:05
 
 | Hora | L | M | W | J | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -19,9 +19,4 @@ Actualizado: 05/06/2026 12:59
 | 20:00 |   |   |   |   |   |   |
 | 21:00 |   |   |   |   |   |   |
 
-### 🔍 Detalle:
-- NRC 83677: ❌ No encontrado en periodos ['202620', '202619', '202618']
-- NRC 10017: ❌ No encontrado en periodos ['202620', '202619', '202618']
-- NRC 10016: ❌ No encontrado en periodos ['202620', '202619', '202618']
-- NRC 83674: ❌ No encontrado en periodos ['202620', '202619', '202618']
-- NRC 22060: ❌ No encontrado en periodos ['202620', '202619', '202618']
+⚠️ No se encontraron los NRCs. Verifica el archivo mis_clases.txt.
