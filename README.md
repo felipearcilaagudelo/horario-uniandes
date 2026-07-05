@@ -1,5 +1,5 @@
 # 🗓️ Mi Horario Uniandes
-Actualizado: 05/07/2026 04:58
+Actualizado: 05/07/2026 08:06
 
 | Hora | L | M | W | J | V | S |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
